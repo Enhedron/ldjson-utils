@@ -1,0 +1,34 @@
+#!/usr/bin/pypy
+
+import sys, json
+
+if len(sys.argv) < 2:
+    print """Usage: {0} <python expression> [filenames]
+
+Examples:
+    Read from stdin:
+        {0} 'doc["dateOfBirth"] == 19741116'
+
+    Read from files:
+        {0} 'doc["dateOfBirth"] == 19741116 and doc["name"] == "Simon"' file1.json file2.json file3.json
+""".format(sys.argv[0])
+    sys.exit(-1)
+
+filenameList = sys.argv[2:]
+
+exec """
+def processFile(file):
+    for line in file:
+        doc = json.loads(line)
+
+        if (%s):
+            sys.stdout.write(line)
+
+if not filenameList:
+    processFile(sys.stdin)
+else:
+    for filename in filenameList:
+        processFile(open(filename))
+        
+""" % sys.argv[1]
+
