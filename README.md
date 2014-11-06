@@ -14,7 +14,7 @@ Usage:
 
     ldjson-filter EXPRESSION [FILE]...
 
-Filter line delimited json. EXPRESSION is a python expression that evaluates to a bool. If EXPRESSION evaluates to True on a given line, the line is output on stdout. The expression is provided with a variable called `doc` for each line, which is the result of `json.loads(line)`.
+Filter line delimited json like grep. EXPRESSION is a python expression that evaluates to a bool. If EXPRESSION evaluates to True on a given line, the line is output on stdout. The expression is provided with a variable called `doc` for each line, which is the result of `json.loads(line)`.
 
 ### Examples
 
