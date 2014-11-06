@@ -1,17 +1,44 @@
 #!/usr/bin/pypy
 
-import sys, json
+import sys, json, os
 
 if len(sys.argv) < 2:
-    print """Usage: {0} <python expression> [filenames]
+    _, commandName = os.path.split(sys.argv[0])
 
-Examples:
-    Read from stdin:
-        {0} 'doc["dateOfBirth"] == 19741116'
+    print """Usage: {0} EXPRESSION [FILE]...
 
-    Read from files:
-        {0} 'doc["dateOfBirth"] == 19741116 and doc["name"] == "Simon"' file1.json file2.json file3.json
-""".format(sys.argv[0])
+Filter line delimited json. EXPRESSION is a python expression that evaluates
+to a bool. If EXPRESSION evaluates to True on a given line, the line is
+output on stdout. The expression is provided with a variable called 'doc'
+for each line, which is the result of json.loads(line).
+
+Examples
+========
+
+Given the following line delimited json:
+
+{{ "forename": "Charles", "surname": "Babbage", "dob": 17911226 }}
+{{ "forename": "Ada", "surname": "Lovelace", "dob": 18151210 }}
+
+Read from stdin
+---------------
+
+{0} 'doc["dob"] == 17911226 and doc["forename"] == "Charles"'
+
+will output:
+
+{{ "forename": "Charles", "surname": "Babbage", "dob": 17911226}}
+
+Read from files
+---------------
+
+{0} 'doc["dob"] == 18151210' log1.ldjson log2.ldjson
+
+will output:
+
+{{ "forename": "Ada", "surname": "Lovelace", "dob": 18151210 }}
+
+""".format(commandName)
     sys.exit(-1)
 
 filenameList = sys.argv[2:]
