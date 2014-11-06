@@ -5,7 +5,7 @@ import sys, json, os
 if len(sys.argv) < 2:
     _, commandName = os.path.split(sys.argv[0])
 
-    print """Usage: {0} EXPRESSION [FILE]...
+    print("""Usage: {0} EXPRESSION [FILE]...
 
 Filter line delimited json. EXPRESSION is a python expression that evaluates
 to a bool. If EXPRESSION evaluates to True on a given line, the line is
@@ -38,12 +38,12 @@ will output:
 
 {{ "forename": "Ada", "surname": "Lovelace", "dob": 18151210 }}
 
-""".format(commandName)
+""".format(commandName))
     sys.exit(-1)
 
 filenameList = sys.argv[2:]
 
-exec """
+exec("""
 def processFile(file):
     for line in file:
         doc = json.loads(line)
@@ -57,5 +57,5 @@ else:
     for filename in filenameList:
         processFile(open(filename))
         
-""" % sys.argv[1]
+""" % sys.argv[1])
 
