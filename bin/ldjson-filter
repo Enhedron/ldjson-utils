@@ -27,7 +27,7 @@ Read from stdin
 
 will output:
 
-{{ "forename": "Charles", "surname": "Babbage", "dob": 17911226}}
+{{ "forename": "Charles", "surname": "Babbage", "dob": 17911226 }}
 
 Read from files
 ---------------
