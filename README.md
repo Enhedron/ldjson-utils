@@ -4,7 +4,7 @@ Line Delimited JSON Utilities
 
 ## Installation
 
-You'll need `/usr/bin/pypy`. It should run with most versions of python or pypy, but has been tested with pypy 2.7.3, python 2.7.6 and python3.4.0.
+You'll need `/usr/bin/pypy`. It should run with most versions of python or pypy, but has been tested with pypy 2.7.3, python 2.7.6 and python 3.4.0.
 
 Just clone the repository, and use the scripts in `bin`. There's no need to compile anything.
 
